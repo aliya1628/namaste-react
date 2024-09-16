@@ -1,0 +1,27 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "This is Namaste React by Akshay Saini",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliya1628/namaste-react.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Aliya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aliya1628/namaste-react/issues"
+  },
+  "homepage": "https://github.com/aliya1628/namaste-react#readme",
+  "dependencies": {
+    "-": "^0.0.1",
+    "D": "^1.0.0",
+    "parcel": "^2.12.0"
+  }
+}
