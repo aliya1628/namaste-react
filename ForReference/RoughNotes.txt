@@ -1,0 +1,16 @@
+/**
+ * Header
+ * - Nav items
+ * - Logo
+ * - 
+ * Body
+ * - Search
+ * - Resturant Container
+ *   -- Resturant Card
+     --- Name of Resturan, Star Rating, Cuisine, Delivery Time
+ * Footer
+ * - Address
+ * - Links
+ * - Contact
+ * - Copyright
+ */
