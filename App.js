@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const restaurantData = [
+const restaurantDataList = [
   {
     data: {
       id: "28405",
@@ -13,7 +13,7 @@ const restaurantData = [
       deliveryTime: 27,
     },
   },
-  { 
+  {
     data: {
       id: "243517",
       name: "KFC",
@@ -25,17 +25,48 @@ const restaurantData = [
       deliveryTime: 40,
     },
   },
+  {
+    data: {
+      id: "32399",
+      name: "McDonald's",
+      cloudinaryImageId:
+        "RX_THUMBNAIL/IMAGES/VENDOR/2024/9/18/2801a82b-0761-40ef-9de0-906d150b1833_32399.jpg",
+      costForTwo: "₹400 for two",
+      cuisines: ["Burgers", "Beverages", "Cafe", "Desserts"],
+      avgRating: 4.3,
+      deliveryTime: 19,
+    },
+  },
+  {
+    data: {
+      id: "296658",
+      name: "Big Bowl",
+      cloudinaryImageId:
+        "RX_THUMBNAIL/IMAGES/VENDOR/2024/6/22/deff0d02-ca1d-4ef9-9d62-b0cbeabf33d3_296658.JPG",
+      costForTwo: "₹400 for two",
+      cuisines: ["North Indian", "Chinese", "Tibetan", "Desserts"],
+      avgRating: 4.2,
+      deliveryTime: 19,
+    },
+  },
 ];
 
 const RestaurantCard = (props) => {
- const {restaurantObject} = props;
+  const { restaurantObject } = props;
+  const { name, cuisines, avgRating, deliveryTime } = restaurantObject?.data; // destructuring  data
   return (
     <div className="restaurant-card">
-      <img className="image-card" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+ restaurantObject.data.cloudinaryImageId}></img>
-      <h3>{restaurantObject.data.name}</h3>
-      <h4>{restaurantObject.data.cuisines.join(", ")}</h4>
-      <h4>{restaurantObject.data.avgRating}</h4>
-      <h4>{restaurantObject.data.deliveryTime}</h4>
+      <img
+        className="image-card"
+        src={
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+          restaurantObject.data.cloudinaryImageId
+        }
+      ></img>
+      <h3>{name}</h3>
+      <h4>{cuisines.join(", ")}</h4>
+      <h4>{avgRating} star</h4>
+      <h4>{deliveryTime}</h4>
     </div>
   );
 };
@@ -56,13 +87,9 @@ const Body = () => {
         <input type="text" /> search
       </div>
       <div className="restaurant-container">
-        <RestaurantCard
-          restaurantObject = {restaurantData[0]}
-        />
-        <RestaurantCard
-          restaurantObject = {restaurantData[1]}
-        />
-        
+        {restaurantDataList.map((resData) => (
+          <RestaurantCard key = {resData.data.id} restaurantObject={resData} />
+        ))}
       </div>
     </div>
   );
