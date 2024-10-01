@@ -34,6 +34,7 @@
 }
 .search{
     margin: 10px 10px 10px 10px;
+    display: flex;
 }
 .image-card{
     width: 100px;
@@ -51,4 +52,8 @@
 }
 .copyright-content{
     margin: 10px 10px 10px 10px;
+}
+.btn-filterCards{
+    padding-right: 5px;
+    margin-left: 200px;
 }
