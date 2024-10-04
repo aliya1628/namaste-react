@@ -2,12 +2,12 @@ import { CARD_URL } from "../utils/constants";
 
 const RestaurantCard = (props) => {
     const { restaurantObject } = props;
-    const { name, cuisines, avgRating, deliveryTime } = restaurantObject?.data; // destructuring  data
+    const { name, cuisines, avgRating, deliveryTime } = restaurantObject?.info; // destructuring  data
     return (
       <div className="restaurant-card">
         <img
           className="image-card"
-          src={CARD_URL + restaurantObject.data.cloudinaryImageId}
+          src={CARD_URL + restaurantObject.info.cloudinaryImageId}
         ></img>
         <h3>{name}</h3>
         <h4>{cuisines.join(", ")}</h4>

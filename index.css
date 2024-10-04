@@ -19,7 +19,7 @@
     font-size: 20px;
    }
 .body-container{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding-top: 10px;
     margin-top: 20px;
 }
@@ -46,7 +46,7 @@
     flex: wrap;
 }
 .footer-container{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding-top: 10px;
     margin-top: 20px;
 }
