@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
     
   const Body = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -17,14 +18,8 @@ import { useEffect, useState } from "react";
       console.log(jsonData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
       setListOfRestaurants(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)  // Optional Chaining 
     };
-
-    if (listOfRestaurants.length === 0)
-    {
-      {console.log("loading")}
-      return <h1>Loading..</h1>
-    }
-
-    return (
+  
+    return (listOfRestaurants.length === 0) ? <Shimmer/> : (
       <div className="body-container">
         <div className="search">
           <input type="text"/>  search 
