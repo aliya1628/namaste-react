@@ -15,8 +15,14 @@ import { useEffect, useState } from "react";
 
       const jsonData = await data.json();
       console.log(jsonData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-      setListOfRestaurants(jsonData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
+      setListOfRestaurants(jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)  // Optional Chaining 
     };
+
+    if (listOfRestaurants.length === 0)
+    {
+      {console.log("loading")}
+      return <h1>Loading..</h1>
+    }
 
     return (
       <div className="body-container">
