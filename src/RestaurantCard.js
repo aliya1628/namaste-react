@@ -2,7 +2,7 @@ import { CARD_URL } from "../utils/constants";
 
 const RestaurantCard = (props) => {
     const { restaurantObject } = props;
-    const { name, cuisines, avgRating, deliveryTime } = restaurantObject?.info; // destructuring  data
+    const { name, cuisines, avgRating, costForTwo,sla } = restaurantObject?.info; // destructuring  data
     return (
       <div className="restaurant-card">
         <img
@@ -12,7 +12,8 @@ const RestaurantCard = (props) => {
         <h3>{name}</h3>
         <h4>{cuisines.join(", ")}</h4>
         <h4>{avgRating} star</h4>
-        <h4>{deliveryTime}</h4>
+        <h4>{costForTwo}</h4>
+        <h4>Delivery time : {sla.deliveryTime} minutes</h4>
       </div>
     );
   };
