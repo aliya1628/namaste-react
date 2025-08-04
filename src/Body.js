@@ -17,10 +17,7 @@ const Body = () => {
     );
 
     const jsonData = await data.json();
-    // const simplifiedObject =
-    //   jsonData.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
-
-    //console.log(simplifiedObject);
+  
     setListOfRestaurants(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
