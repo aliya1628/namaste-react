@@ -3,6 +3,7 @@ import { CARD_URL } from "../utils/constants";
 const RestaurantCard = (props) => {
     const { restaurantObject } = props;
     const { name, cuisines, avgRating, costForTwo,sla } = restaurantObject?.info; // destructuring  data
+    
     return (
       <div className="restaurant-card">
         <img
