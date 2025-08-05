@@ -1,32 +1,35 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);  //changed only once when the component is mounted
+  const [listOfRestaurants, setListOfRestaurants] = useState([]); //changed only once when the component is mounted
   const [filteredRestautants, setfilteredRestautants] = useState([]);
   const [searchText, setSearchText] = useState("");
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-
     const jsonData = await data.json();
-  
     setListOfRestaurants(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     ); // Optional Chaining
+
     setfilteredRestautants(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
-    ); 
+    );
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log(listOfRestaurants, "List of Restaurants");
+  }, [listOfRestaurants]);
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -42,12 +45,14 @@ const Body = () => {
           }}
         />{" "}
         <button
-          onClick={() => {            
+          onClick={() => {
             console.log(searchText);
             const filterItems = listOfRestaurants.filter((res) => {
-             return res.info.name.toLowerCase().includes(searchText.toLowerCase());  // return not used in the tutorial but required in our case else it will return undefined
+              return res.info.name
+                .toLowerCase()
+                .includes(searchText.toLowerCase()); // return not used in the tutorial but required in our case else it will return undefined
             });
-            console.log(filterItems ,"Filtered");
+            console.log(filterItems, "Filtered");
             setfilteredRestautants(filterItems);
           }}
         >
@@ -69,7 +74,10 @@ const Body = () => {
       </div>
       <div className="restaurant-container">
         {filteredRestautants.map((resData) => (
-          <RestaurantCard key={resData.info.id} restaurantObject={resData} />
+          //to={`/restaurant/${resId}`
+          <Link className="clean-link" key={resData.info.id} to={"/restaurants/" + resData.info.id}> 
+            <RestaurantCard restaurantObject={resData} />
+          </Link>
         ))}
       </div>
     </div>

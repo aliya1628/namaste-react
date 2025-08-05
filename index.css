@@ -2,6 +2,7 @@
     display: flex;
     /* border: 1px solid black; */
     justify-content: space-between;
+    
 }
 .logo{
     width: 100px;
@@ -12,11 +13,12 @@
  list-style-type: none;
  /* border: 1px solid black; */
  margin-right: 10px;
+ 
 }
 .nav-items > ul > li{
     padding: 10px;
     margin: 10px;
-    font-size: 20px;
+    font-size: 20px;    
    }
 .body-container{
     /* border: 1px solid black; */
@@ -71,3 +73,8 @@
     padding: 0 20px;
     cursor: pointer;
 }
+.clean-link {
+  color: black;
+  text-decoration: none;
+}
+

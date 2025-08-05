@@ -4,33 +4,44 @@ import { useParams } from "react-router-dom";
 import { SWIGGY_MENU_API_URL } from "../utils/constants";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
-  const {resId} = useParams(); // Get the restaurant ID from the URL parameters
- 
+  const [resInfo, setResInfo] = useState({}); // Initialize with null to handle loading state
+  const { resId } = useParams(); // Get the restaurant ID from the URL parameters
+
   useEffect(() => {
     fetchMenu();
   }, []);
 
-  const fetchMenu = async () => {
-    const menuData = await fetch(SWIGGY_MENU_API_URL+resId); // Fetch the menu data using the restaurant ID from the URL
-    const jsonMenuData = await menuData.json();
-    console.log(jsonMenuData?.data?.cards[2].card.card?.info);
-    setResInfo(jsonMenuData?.data);
-  };
-  const {
-    name,
-    cuisines,
-    avgRating,
-    costForTwoMessage,
-    sla,
-    cloudinaryImageId,
-  } = resInfo?.cards[2].card.card?.info || {};
-  const { itemCards } =
-    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
-      ?.card || {};
-  console.log(itemCards);
+  // useEffect(() => {
+  //   if (resInfo) {
+  //     console.log(resInfo, "Updated Restaurant_Info");
+  //   }
+  // }, [resInfo]);
 
-  return resInfo === null ? (
+  const fetchMenu = async () => {
+    console.log(resId, "Restaurant ID");
+    // const response = await fetch(
+    //   `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.07480&lng=72.88560&restaurantId=${resId}&catalog_qa=undefined&submitAction=ENTER`
+    // );
+    const response = await fetch(`${SWIGGY_MENU_API_URL}${resId}`); // Use the constant for the API URL
+    const jsonMenuData = await response.json();
+    setResInfo(jsonMenuData); // this schedules the update
+  };
+
+  // const { name, cuisines, costForTwoMessage } = resInfo?.data?.cards[2]?.card?.card?.info;  //from the tutorial but optional chaining is not safe here instead used fallback to avoid errors
+
+  let name, cuisines, costForTwoMessage;
+
+  const info = resInfo?.data?.cards?.[2]?.card?.card?.info;
+  if (info) {
+    name = info.name;
+    cuisines = info.cuisines;
+    costForTwoMessage = info.costForTwoMessage;
+  }
+
+  const itemCards = resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards;
+  console.log(itemCards, "Item Cards");
+
+  return !info ? (
     <Shimmer />
   ) : (
     <div className="restaurant-menu">
@@ -40,7 +51,7 @@ const RestaurantMenu = () => {
       </p>
       <h2>Menu</h2>
       <ul>
-        {itemCards.map((item) => (
+        {itemCards.map((item) => (         
           <li key={item.card.info.id}>{item.card.info.name} - {"Rs. "}{item.card.info.defaultPrice}</li>
         ))}
       </ul>
