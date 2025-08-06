@@ -2,11 +2,20 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus"; // Importing the custom hook
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]); //changed only once when the component is mounted
   const [filteredRestautants, setfilteredRestautants] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    console.log(listOfRestaurants, "List of Restaurants");
+  }, [listOfRestaurants]);
 
   const fetchData = async () => {
     const data = await fetch(
@@ -23,13 +32,15 @@ const Body = () => {
         ?.restaurants
     );
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const onlineStatus = useOnlineStatus(); // Using the custom hook
 
-  useEffect(() => {
-    console.log(listOfRestaurants, "List of Restaurants");
-  }, [listOfRestaurants]);
+  if (onlineStatus === false) {
+    return (
+      <h1 className="offline-message">
+        "You are offline! Please check your internet connection."
+      </h1>
+    );
+  }
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -75,7 +86,11 @@ const Body = () => {
       <div className="restaurant-container">
         {filteredRestautants.map((resData) => (
           //to={`/restaurant/${resId}`
-          <Link className="clean-link" key={resData.info.id} to={"/restaurants/" + resData.info.id}> 
+          <Link
+            className="clean-link"
+            key={resData.info.id}
+            to={"/restaurants/" + resData.info.id}
+          >
             <RestaurantCard restaurantObject={resData} />
           </Link>
         ))}
