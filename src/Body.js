@@ -1,5 +1,5 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, {withpromotedLabel} from "./RestaurantCard";
+import { use, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link, useLocation } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -9,6 +9,8 @@ const Body = () => {
   const [filteredRestaurants, setfilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const location = useLocation(); // To get the current location
+  const [enabled, setEnabled] = useState(false);
+  const PromotedRestaurantCard = withpromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -58,29 +60,46 @@ const Body = () => {
     <div className="body-container">
       <div className="mx-22 flex justify-between items-center">
         <div className="m-2 p-2 flex">
-          <input
-            type="text"
-            className="border border-solid border-black rounded-lg p-1 m-1 hover:bg-gray-100"
-            value={searchText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          <button
-            className="px-4 py-2 bg-green-200 rounded-lg"
-            onClick={() => {
-              console.log(searchText);
-              const filterItems = listOfRestaurants.filter((res) => {
-                return res.info.name
-                  .toLowerCase()
-                  .includes(searchText.toLowerCase());
-              });
-              console.log(filterItems, "Filtered");
-              setfilteredRestaurants(filterItems);
-            }}
-          >
-            Search
-          </button>
+          <div className="p-0.5">
+            <input
+              type="text"
+              className="border border-solid border-black rounded-lg p-1 m-1 hover:bg-gray-100"
+              value={searchText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
+            />
+            <button
+              className="px-4 py-2 bg-green-200 rounded-lg"
+              onClick={() => {
+                console.log(searchText);
+                const filterItems = listOfRestaurants.filter((res) => {
+                  return res.info.name
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase());
+                });
+                console.log(filterItems, "Filtered");
+                setfilteredRestaurants(filterItems);
+              }}
+            >
+              Search
+            </button>
+          </div>
+          <div className="p-4 justify-center">
+            <button
+              type="button"
+              className={`relative inline-flex h-6 w-12 items-center rounded-full transition-colors focus:outline-none ${
+                enabled ? "bg-blue-600" : "bg-gray-300"
+              }`}
+              onClick={() => setEnabled(!enabled)}
+            >
+              <span
+                className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                  enabled ? "translate-x-6" : "translate-x-1"
+                }`}
+              />
+            </button>
+          </div>
         </div>
         <div>
           <button
@@ -107,7 +126,8 @@ const Body = () => {
             key={resData.info.id}
             to={"/restaurants/" + resData.info.id}
           >
-            <RestaurantCard restaurantObject={resData} />
+            {enabled ? <PromotedRestaurantCard restaurantObject={resData} /> :
+            <RestaurantCard restaurantObject={resData} />}
           </Link>
         ))}
       </div>
