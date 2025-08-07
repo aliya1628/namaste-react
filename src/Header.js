@@ -7,18 +7,15 @@ const Header = () => {
   const [buttonName, setButtonName] = useState("Login");
   const onlineStatus = useOnlineStatus(); // Using the custom hook
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL}></img>
+    <div className="mx-22 flex justify-between shadow-lg p-4 m-1 rounded-lg">
+      <div className="w-56">
+        <Link to="/">
+          <img className="w-32" src={LOGO_URL}></img>
+        </Link>
       </div>
-      <div className="nav-items">
-        <ul>
+      <div className="flex items-center">
+        <ul className="flex space-x-4 text-base font-bold">
           <li>Online Status: {onlineStatus ? "✅" : "❌"}</li>
-          <li>
-            <Link className="clean-link" to="/">
-              Home
-            </Link>
-          </li>
           <li>
             <Link className="clean-link" to="/about">
               About Us
@@ -34,6 +31,7 @@ const Header = () => {
               Grocery Shop
             </Link>
           </li>
+          <li>Cart</li>
           <li>
             <button
               className="btn-login"

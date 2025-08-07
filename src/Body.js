@@ -1,21 +1,22 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus"; // Importing the custom hook
+import { Link, useLocation } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]); //changed only once when the component is mounted
-  const [filteredRestautants, setfilteredRestautants] = useState([]);
+  const [filteredRestaurants, setfilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const location = useLocation(); // To get the current location
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    console.log(listOfRestaurants, "List of Restaurants");
-  }, [listOfRestaurants]);
+  // useEffect(() => {
+  //   console.log(listOfRestaurants, "List of Restaurants");
+  // }, [listOfRestaurants]);
 
   const fetchData = async () => {
     const data = await fetch(
@@ -27,11 +28,20 @@ const Body = () => {
         ?.restaurants
     ); // Optional Chaining
 
-    setfilteredRestautants(
+    setfilteredRestaurants(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
+
+  // Reset to all restaurants when navigating to "/"
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setfilteredRestaurants(listOfRestaurants);
+      console.log("Resetting to all restaurants", listOfRestaurants);
+    }
+  }, [location.pathname, listOfRestaurants]);
+
   const onlineStatus = useOnlineStatus(); // Using the custom hook
 
   if (onlineStatus === false) {
@@ -46,45 +56,51 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body-container">
-      <div className="search">
-        <input
-          type="text"
-          className="search-text"
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
-        />{" "}
-        <button
-          onClick={() => {
-            console.log(searchText);
-            const filterItems = listOfRestaurants.filter((res) => {
-              return res.info.name
-                .toLowerCase()
-                .includes(searchText.toLowerCase()); // return not used in the tutorial but required in our case else it will return undefined
-            });
-            console.log(filterItems, "Filtered");
-            setfilteredRestautants(filterItems);
-          }}
-        >
-          Search
-        </button>
-        <button
-          className="btn-filterCards"
-          onClick={() => {
-            console.log(listOfRestaurants);
-            const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 4.5
-            );
-            console.log(filteredList);
-            setListOfRestaurants(filteredList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+      <div className="mx-22 flex justify-between items-center">
+        <div className="m-2 p-2 flex">
+          <input
+            type="text"
+            className="border border-solid border-black rounded-lg p-1 m-1 hover:bg-gray-100"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            className="px-4 py-2 bg-green-200 rounded-lg"
+            onClick={() => {
+              console.log(searchText);
+              const filterItems = listOfRestaurants.filter((res) => {
+                return res.info.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase());
+              });
+              console.log(filterItems, "Filtered");
+              setfilteredRestaurants(filterItems);
+            }}
+          >
+            Search
+          </button>
+        </div>
+        <div>
+          <button
+            className="px-4 py-2 m-2 bg-green-200 rounded-lg"
+            onClick={() => {
+              console.log(listOfRestaurants);
+              const filteredList = listOfRestaurants.filter(
+                (res) => res.info.avgRating < 4.5
+              );
+              console.log(filteredList);
+              setfilteredRestaurants(filteredList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
-      <div className="restaurant-container">
-        {filteredRestautants.map((resData) => (
+
+      <div className="flex flex-wrap justify-center">
+        {filteredRestaurants.map((resData) => (
           //to={`/restaurant/${resId}`
           <Link
             className="clean-link"
