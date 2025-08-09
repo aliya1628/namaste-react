@@ -1,8 +1,9 @@
 import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import userContext from "../utils/userContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]); //changed only once when the component is mounted
@@ -10,6 +11,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [enabled, setEnabled] = useState(false); // suppose this as promoted value coming from api
   const PromotedRestaurantCard = withPromotedLabel(RestaurantCard);
+  const { loggedInUser , setUserName} = useContext(userContext); // Using context to get logged in user
 
   useEffect(() => {
     fetchData();
@@ -76,6 +78,14 @@ const Body = () => {
               Search
             </button>
           </div>
+          <div className="p-0.5">
+            <input
+              type="text"
+              className="border border-solid border-black rounded-lg p-1 m-1 hover:bg-gray-100"
+              value={loggedInUser}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+            </div>
           <div className="p-4 justify-center">
             <button
               type="button"

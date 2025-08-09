@@ -14,7 +14,7 @@ const RestaurantCategory = ({ data,showItems,setShowItems }) => {
   return (
     <div className="w-6/12 mx-auto my-4 p-4 bg-gray-50 shadow-lg">
       <div
-        className="flex justify-between items-center"
+        className="flex justify-between items-center cursor-pointer"
         onClick={() => handleClick()}
       >
         <span className="text-lg font-bold">

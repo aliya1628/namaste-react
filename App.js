@@ -2,24 +2,39 @@ import ReactDOM from "react-dom/client";
 import Footer from "./src/Footer";
 import Header from "./src/Header";
 import Body from "./src/Body";
-import About from "./src/About";
 import Contact from "./src/Contact";
 import Error from "./src/Error";
 import RestaurantMenu from "./src/RestaurantMenu";
 import { createBrowserRouter, RouterProvider,Outlet } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import userContext from "./utils/userContext";
 
 const AppLayout = () => {
+const [userName , setUserName] = useState();
+
+useEffect(() => {
+  // Simulating an API call to fetch user data
+  const user = {
+    name: "Aliya"
+  }
+  setUserName(user.name);
+},[]);
+
   return (
+    <userContext.Provider value={{ loggedInUser: userName,setUserName  }}> 
     <div className="appLayout">
-      <Header />
+      {/* <userContext.Provider value={{ loggedInUser="Ally" }}> */}
+        <Header />
+      {/* </userContext.Provider>       */}
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </div>
+    </userContext.Provider>
   );
 };
 
 const Grocery = lazy(() => import("./src/Grocery")); // Lazy loading Grocery component
+const About = lazy(() => import("./src/About")); 
 
 const appRouter = createBrowserRouter([
   {
@@ -33,7 +48,7 @@ const appRouter = createBrowserRouter([
     },     
     {
     path: "/about",
-    element: <About />,
+    element:<Suspense fallback={<h1>Loading...</h1>}><About /></Suspense>,
     },
     {
     path: "/contact",
@@ -47,8 +62,7 @@ const appRouter = createBrowserRouter([
     path: "/restaurants/:resId",
     element: <RestaurantMenu />,
     }
-  ]
-  }  
+  ]}  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
