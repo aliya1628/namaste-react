@@ -1,16 +1,15 @@
-import RestaurantCard, {withpromotedLabel} from "./RestaurantCard";
-import { use, useEffect, useState } from "react";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
+import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]); //changed only once when the component is mounted
   const [filteredRestaurants, setfilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const location = useLocation(); // To get the current location
-  const [enabled, setEnabled] = useState(false);
-  const PromotedRestaurantCard = withpromotedLabel(RestaurantCard);
+  const [enabled, setEnabled] = useState(false); // suppose this as promoted value coming from api
+  const PromotedRestaurantCard = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -35,14 +34,6 @@ const Body = () => {
         ?.restaurants
     );
   };
-
-  // Reset to all restaurants when navigating to "/"
-  useEffect(() => {
-    if (location.pathname === "/") {
-      setfilteredRestaurants(listOfRestaurants);
-      console.log("Resetting to all restaurants", listOfRestaurants);
-    }
-  }, [location.pathname, listOfRestaurants]);
 
   const onlineStatus = useOnlineStatus(); // Using the custom hook
 
