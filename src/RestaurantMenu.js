@@ -2,10 +2,12 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams(); 
-  const resInfo = useRestaurantMenu(resId); // Using the custom hook to fetch restaurant menu data
+  const resInfo = useRestaurantMenu(resId);
+   const [showItems, setShowItems] = useState(1);
 
   let name, cuisines, costForTwoMessage;
 
@@ -36,7 +38,7 @@ const categorgies = regularCards.filter( (category) => category?.card?.card?.["@
         {cuisines.join(",")} - {costForTwoMessage}
       </p>
       {/* category accordion */}
-      {categorgies.map((category) => <RestaurantCategory key={category?.card?.card?.categoryId} data= {category?.card?.card}/>)}      
+      {categorgies.map((category,index) => <RestaurantCategory key={category?.card?.card?.categoryId} data= {category?.card?.card} showItems={index === showItems  ? true : false} setShowItems={() => setShowItems(index)}/>)}      
     </div>
   );
 };
