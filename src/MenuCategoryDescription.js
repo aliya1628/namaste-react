@@ -1,6 +1,13 @@
 import { CARD_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice"; // Importing the action creator
+
 const MenuCategoryDescription = ({ description }) => {
   //  console.log(description, "Description Data");
+  const dispatch = useDispatch();
+  const handleAddItems = (item) => {  
+    dispatch(addItem(item)); // Dispatching the addItem action with the description
+  }
   return (
     <>
       {description.map((item) => (
@@ -20,7 +27,8 @@ const MenuCategoryDescription = ({ description }) => {
             <div className="relative flex justify-center items-center">
                 {item.card.info.imageId ? <img src={CARD_URL + item.card.info.imageId} className="rounded-lg w-full h-auto" /> : <div className="p-4 m-4"></div>}              
               <button
-                className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 shadow-lg rounded-lg text-green-600 bg-amber-50 font-bold"
+                className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 shadow-lg rounded-lg text-green-600 bg-amber-50 font-bold cursor-pointer"                
+                 onClick={() => handleAddItems(item)}
               >
                 ADD
               </button>

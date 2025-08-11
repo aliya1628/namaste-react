@@ -4,10 +4,13 @@ import Header from "./src/Header";
 import Body from "./src/Body";
 import Contact from "./src/Contact";
 import Error from "./src/Error";
+import Cart from "./src/Cart";
 import RestaurantMenu from "./src/RestaurantMenu";
 import { createBrowserRouter, RouterProvider,Outlet } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
 import userContext from "./utils/userContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore"; // Importing the Redux store
 
 const AppLayout = () => {
 const [userName , setUserName] = useState();
@@ -21,6 +24,7 @@ useEffect(() => {
 },[]);
 
   return (
+    <Provider store={appStore}> 
     <userContext.Provider value={{ loggedInUser: userName,setUserName  }}> 
     <div className="appLayout">
       {/* <userContext.Provider value={{ loggedInUser="Ally" }}> */}
@@ -30,6 +34,7 @@ useEffect(() => {
       <Footer />
     </div>
     </userContext.Provider>
+    </Provider>
   );
 };
 
@@ -61,6 +66,10 @@ const appRouter = createBrowserRouter([
     {
     path: "/restaurants/:resId",
     element: <RestaurantMenu />,
+    },
+    {
+      path: "/cart",
+      element: <Cart />
     }
   ]}  
 ]);
