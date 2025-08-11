@@ -128,7 +128,7 @@ const Body = () => {
             to={"/restaurants/" + resData.info.id}
           >
             {enabled ? <PromotedRestaurantCard restaurantObject={resData} /> :
-            <RestaurantCard restaurantObject={resData} />}
+            <RestaurantCard resData={resData?.info} />}
           </Link>
         ))}
       </div>

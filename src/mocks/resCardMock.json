@@ -1,0 +1,76 @@
+{
+    "id": "639509",
+    "name": "Dum Safar Biryani",
+    "cloudinaryImageId": "kbkr6vrtwjes0squcoqf",
+    "locality": "Bandra Kurla Complex",
+    "areaName": "Scruz Bandra East",
+    "costForTwo": "₹500 for two",
+    "cuisines": [
+        "Biryani",
+        "Kebabs",
+        "North Indian",
+        "Barbecue"
+    ],
+    "avgRating": 4.1,
+    "parentId": "351013",
+    "avgRatingString": "4.1",
+    "totalRatingsString": "843",
+    "sla": {
+        "deliveryTime": 17,
+        "lastMileTravel": 1.7,
+        "serviceability": "SERVICEABLE",
+        "slaString": "15-20 mins",
+        "lastMileTravelString": "1.7 km",
+        "iconType": "ICON_TYPE_EMPTY"
+    },
+    "availability": {
+        "nextCloseTime": "2025-08-11 23:30:00",
+        "opened": true
+    },
+    "badges": {
+        "imageBadges": [
+            {
+                "imageId": "android/static-assets/icons/big_rx.png",
+                "description": "bolt!"
+            }
+        ]
+    },
+    "isOpen": true,
+    "type": "F",
+    "badgesV2": {
+        "entityBadges": {
+            "imageBased": {
+                "badgeObject": [
+                    {
+                        "attributes": {
+                            "description": "bolt!",
+                            "imageId": "android/static-assets/icons/big_rx.png"
+                        }
+                    }
+                ]
+            },
+            "textBased": {},
+            "textExtendedBadges": {}
+        }
+    },
+    "aggregatedDiscountInfoV3": {
+        "header": "ITEMS",
+        "subHeader": "AT ₹99"
+    },
+    "differentiatedUi": {
+        "displayType": "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        "differentiatedUiMediaDetails": {
+            "lottie": {},
+            "video": {}
+        }
+    },
+    "reviewsSummary": {},
+    "displayType": "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+    "restaurantOfferPresentationInfo": {},
+    "externalRatings": {
+        "aggregatedRating": {
+            "rating": "--"
+        }
+    },
+    "ratingsDisplayPreference": "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
+}

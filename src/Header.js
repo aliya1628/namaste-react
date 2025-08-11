@@ -17,7 +17,7 @@ const Header = () => {
   //# will give performance loss 
 
   const cartItems = useSelector((store) => store.cart.items); 
-  console.log("cartItems", cartItems);
+  //console.log("cartItems", cartItems);
 
   return (
     <div className="mx-22 flex justify-between shadow-lg p-4 m-1 rounded-lg">

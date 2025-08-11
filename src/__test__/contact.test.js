@@ -37,7 +37,7 @@ test("should load 2 inputboxes from the contact component",() => {
 render(<Contact />);
 
 const inputBoxes  = screen.getAllByRole("textbox"); // not input but textbox also: screen rturns an array of elements
-console.log(inputBoxes.length);
+//console.log(inputBoxes.length);
 
 // Assertion to check if the component renders without crashing
 expect(inputBoxes.length).toBe(2);

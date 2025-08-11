@@ -1,14 +1,16 @@
 import { CARD_URL } from "../utils/constants";
 
 const RestaurantCard = (props) => {
-    const { restaurantObject } = props;
-    const { name, cuisines, avgRating, costForTwo,sla } = restaurantObject?.info; // destructuring  data
+    const { resData } = props;
+    const { name, cuisines, avgRating, costForTwo,sla,cloudinaryImageId } = resData; // destructuring  data
+
+    console.log(resData, "resData");
     
     return (
       <div className="m-4 p-4 w-[250px] shadow-lg bg-gray-100 rounded-lg hover:bg-gray-300">
         <img
           className="w-52 h-52 rounded-lg"
-          src={CARD_URL + restaurantObject.info.cloudinaryImageId}
+          src={CARD_URL + cloudinaryImageId}
         ></img>
         <h3>{name}</h3>
         <h4>{cuisines.join(", ")}</h4>
