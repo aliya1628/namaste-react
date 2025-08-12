@@ -1,5 +1,6 @@
-import MenuCategoryDescription from "./MenuCategoryDescription";
+import MenuCategoryDescription from "../components/MenuCategoryDescription";
 import { useState } from "react";
+
 const RestaurantCategory = ({ data,showItems,setShowItems }) => {
   //   console.log(data, "Category Data");
   const [arrowIcon, setArrowIcon] = useState("↓");

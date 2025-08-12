@@ -1,6 +1,6 @@
-import { CARD_URL } from "../utils/constants";
+import { CARD_URL } from "../../utils/constants";
 import { useDispatch } from "react-redux";
-import { addItem } from "../utils/cartSlice"; // Importing the action creator
+import { addItem } from "../../utils/cartSlice"; // Importing the action creator
 
 const MenuCategoryDescription = ({ description }) => {
   //  console.log(description, "Description Data");

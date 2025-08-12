@@ -1,7 +1,7 @@
-import User from "./User";
+import User from "../components/User";
 import UserClass from "./UserClass";
 import React from "react";
-import userContext from "../utils/userContext";
+import userContext from "../../utils/userContext";
 
 class About extends React.Component {
   constructor(props) {

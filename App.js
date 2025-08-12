@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom/client";
-import Footer from "./src/Footer";
-import Header from "./src/Header";
-import Body from "./src/Body";
-import Contact from "./src/Contact";
-import Error from "./src/Error";
-import Cart from "./src/Cart";
-import RestaurantMenu from "./src/RestaurantMenu";
+import Footer from "./src/components/Footer";
+import Header from "./src/components/Header";
+import Body from "./src/components/Body";
+import Contact from "./src/components/Contact";
+import Error from "./src/components/Error";
+import Cart from "./src/components/Cart";
+import RestaurantMenu from "./src/components/RestaurantMenu";
 import { createBrowserRouter, RouterProvider,Outlet } from "react-router-dom";
 import { lazy, Suspense, useEffect, useState } from "react";
 import userContext from "./utils/userContext";
@@ -38,8 +38,8 @@ useEffect(() => {
   );
 };
 
-const Grocery = lazy(() => import("./src/Grocery")); // Lazy loading Grocery component
-const About = lazy(() => import("./src/About")); 
+const Grocery = lazy(() => import("./src/components/Grocery")); // Lazy loading Grocery component
+const About = lazy(() => import("./src/components/About")); 
 
 const appRouter = createBrowserRouter([
   {

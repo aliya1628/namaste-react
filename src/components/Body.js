@@ -1,9 +1,9 @@
-import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "../components/RestaurantCard";
 import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
-import userContext from "../utils/userContext";
+import useOnlineStatus from "../../utils/useOnlineStatus";
+import userContext from "../../utils/userContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]); //changed only once when the component is mounted
