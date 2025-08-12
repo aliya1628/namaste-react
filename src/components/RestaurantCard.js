@@ -4,10 +4,10 @@ const RestaurantCard = (props) => {
     const { resData } = props;
     const { name, cuisines, avgRating, costForTwo,sla,cloudinaryImageId } = resData; // destructuring  data
 
-    console.log(resData, "resData");
+    //console.log(resData, "resData");
     
     return (
-      <div className="m-4 p-4 w-[250px] shadow-lg bg-gray-100 rounded-lg hover:bg-gray-300">
+      <div className="m-4 p-4 w-[250px] shadow-lg bg-gray-100 rounded-lg hover:bg-gray-300" data-testid= "resCardList">
         <img
           className="w-52 h-52 rounded-lg"
           src={CARD_URL + cloudinaryImageId}

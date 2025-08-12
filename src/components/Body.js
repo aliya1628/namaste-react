@@ -50,11 +50,12 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body-container">
+    <div>
       <div className="mx-22 flex justify-between items-center">
         <div className="m-2 p-2 flex">
           <div className="p-0.5">
             <input
+            data-testid="searchInput"
               type="text"
               className="border border-solid border-black rounded-lg p-1 m-1 hover:bg-gray-100"
               value={searchText}
@@ -64,14 +65,13 @@ const Body = () => {
             />
             <button
               className="px-4 py-2 bg-green-200 rounded-lg"
-              onClick={() => {
-                console.log(searchText);
+              onClick={() => {         
                 const filterItems = listOfRestaurants.filter((res) => {
                   return res.info.name
                     .toLowerCase()
                     .includes(searchText.toLowerCase());
                 });
-                console.log(filterItems, "Filtered");
+                // console.log(filterItems, "Filtered");
                 setfilteredRestaurants(filterItems);
               }}
             >
@@ -110,7 +110,7 @@ const Body = () => {
               const filteredList = listOfRestaurants.filter(
                 (res) => res.info.avgRating < 4.5
               );
-              console.log(filteredList);
+              // console.log(filteredList.length, "Top rated");
               setfilteredRestaurants(filteredList);
             }}
           >
@@ -119,7 +119,7 @@ const Body = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center">
+      <div data-testid="resCard" className="flex flex-wrap justify-center">
         {filteredRestaurants.map((resData) => (
           //to={`/restaurant/${resId}`
           <Link

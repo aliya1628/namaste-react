@@ -1,5 +1,5 @@
 import { render,screen } from "@testing-library/react";
-import Contact from "../Contact";
+import Contact from "../components/Contact";
 import "@testing-library/jest-dom"; // import whole library for jest-dom matchers
 
 describe("Contact Component", () => {  // describe block to group tests related to a component
