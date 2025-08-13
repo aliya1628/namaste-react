@@ -5,9 +5,9 @@ import RestaurantCategory from "../components/RestaurantCategory";
 import { useState } from "react";
 
 const RestaurantMenu = () => {
-  const { resId } = useParams(); 
+  const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
-   const [showItems, setShowItems] = useState(1);
+  const [showItems, setShowItems] = useState(1);
 
   let name, cuisines, costForTwoMessage;
 
@@ -17,17 +17,23 @@ const RestaurantMenu = () => {
     cuisines = info.cuisines;
     costForTwoMessage = info.costForTwoMessage;
   }
-  
-const regularCards = resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
-const menuCard = regularCards.find(
-  (card) => card?.card?.card?.itemCards && Array.isArray(card.card.card.itemCards)
-);
-const itemCards = menuCard?.card?.card?.itemCards || [];
-const categorgies = regularCards.filter( (category) => category?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
+
+  const regularCards =
+    resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
+  const menuCard = regularCards.find(
+    (card) =>
+      card?.card?.card?.itemCards && Array.isArray(card.card.card.itemCards)
+  );
+  const itemCards = menuCard?.card?.card?.itemCards || [];
+  const categorgies = regularCards.filter(
+    (category) =>
+      category?.card?.card?.["@type"] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
 
   //console.log(itemCards, "Item Cards");
   // console.log(regularCards, "Regular Cards");
-  // console.log(categorgies, "Categorgies");
+  //  console.log(categorgies.length, "Categorgies");
 
   return !info ? (
     <Shimmer />
@@ -38,7 +44,14 @@ const categorgies = regularCards.filter( (category) => category?.card?.card?.["@
         {cuisines.join(",")} - {costForTwoMessage}
       </p>
       {/* category accordion */}
-      {categorgies.map((category,index) => <RestaurantCategory key={category?.card?.card?.categoryId} data= {category?.card?.card} showItems={index === showItems  ? true : false} setShowItems={() => setShowItems(index)}/>)}      
+      {categorgies.map((category, index) => (
+        <RestaurantCategory 
+          key={category?.card?.card?.categoryId}
+          data={category?.card?.card}
+          showItems={index === showItems ? true : false}
+          setShowItems={() => setShowItems(index)}
+        />
+      ))}
     </div>
   );
 };

@@ -105,8 +105,7 @@ const Body = () => {
         <div>
           <button
             className="px-4 py-2 m-2 bg-green-200 rounded-lg"
-            onClick={() => {
-              console.log(listOfRestaurants);
+            onClick={() => {           
               const filteredList = listOfRestaurants.filter(
                 (res) => res.info.avgRating < 4.5
               );

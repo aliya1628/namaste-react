@@ -2,6 +2,10 @@ import { render,screen } from "@testing-library/react";
 import Contact from "../components/Contact";
 import "@testing-library/jest-dom"; // import whole library for jest-dom matchers
 
+beforeAll(() => {
+    console.log("Before All");
+})
+
 describe("Contact Component", () => {  // describe block to group tests related to a component
     test("should load the component",() => {
 render(<Contact />);

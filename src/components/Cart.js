@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import MenuCategoryDescription from "../components/MenuCategoryDescription";
 import { useDispatch } from "react-redux";
-import { clearCart } from "../../utils/cartSlice"; 
+import { clearCart } from "../../utils/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -20,11 +20,14 @@ const Cart = () => {
           onClick={handleClearCart}
         >
           Clear Cart
-        </button>        
+        </button>
       </div>
-      <div className="p-2 m-2 items-center">{cartItems.length === 0 && (
-          <span className="text-red-500 font-bold">Cart is empty</span>)}</div>
-      <div className="flex flex-col items-center ">
+      <div className="p-2 m-2 items-center">
+        {cartItems.length === 0 && (
+          <span className="text-red-500 font-bold">Cart is empty</span>
+        )}
+      </div>
+      <div className="flex flex-col items-center">
         {/* component reuse */}
         <MenuCategoryDescription description={cartItems} />
       </div>
